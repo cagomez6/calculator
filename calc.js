@@ -130,6 +130,49 @@ function eqPress () {
     }
 }
 
+function bckPress () {
+    if (screenDisplay.innerText == "" || screenDisplay.innerText == "ERROR") {
+        return
+    } else if(a && b) {
+        resetCalc()
+    } else {
+        let currentText = screenDisplay.innerText;
+        let prev = currentText.substring(0, currentText.length-1);
+        let del = currentText.substring(currentText.length-1)
+        console.log(del)
+
+        switch(del){
+            case '+':
+                toggleOp = true;
+                toggleSwap = true;
+                break;
+            case '-':
+                toggleOp = true;
+                toggleSwap = true;
+                break;
+            case '*':
+                toggleOp = true;
+                toggleSwap = true;
+                break;
+            case '/':
+                toggleOp = true;
+                toggleSwap = true;
+                break;
+            case '.':
+                toggleDecimal = true;
+                break;
+            default:
+                if(prev.length > 0) {
+                    if(isNaN(prev[prev.length-1]) && prev[prev.length-1] != ".") {
+                        toggleSwap = true;
+                    }
+                }
+        }
+
+        screenDisplay.innerText = prev;
+    }
+}
+
 numButtons.forEach(btn => {
     btn.addEventListener("click", () => {
         numPress(btn);
@@ -154,5 +197,8 @@ clrButton.addEventListener("click", () => {
     resetCalc()
 })
 
+bckButton.addEventListener("click", () => {
+    bckPress()
+})
 
 
